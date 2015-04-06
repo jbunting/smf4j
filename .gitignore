@@ -1,0 +1,37 @@
+# eclipse
+.classpath
+.project
+.settings
+
+# maven
+target/
+build.number
+release.properties
+*.releaseBackup
+*.versionsBackup
+
+# common junk
+*.log
+*.swp
+*.diff
+*.patch
+
+# intellij
+*.iml
+*.ipr
+*.iws
+.idea/
+atlassian-ide-plugin.xml
+
+# Mac filesystem dust
+.DS_Store
+
+# pmd
+.pmdruleset
+.pmd
+
+# vim
+.*.sw[a-p]
+
+#maven
+*.versionsBackup
