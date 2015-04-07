@@ -44,6 +44,11 @@ public class DropwizardMetricBackend implements MetricBackend {
     return new DropwizardTimer(key, metricRegistry);
   }
 
+  @Override
+  public void registerCheck(StatusCheck<?> check, String key) {
+
+  }
+
   static MetricRegistry init() {
     final Configurator configurator = loadConfigurator();
     return configurator.configure();

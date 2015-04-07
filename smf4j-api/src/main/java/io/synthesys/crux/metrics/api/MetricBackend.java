@@ -16,4 +16,6 @@ public interface MetricBackend {
   Meter getMeter(final String key);
 
   Timer getTimer(final String key);
+
+  void registerCheck(final StatusCheck<?> check, final String key);
 }

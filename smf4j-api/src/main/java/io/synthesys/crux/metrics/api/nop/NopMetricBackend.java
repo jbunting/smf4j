@@ -25,4 +25,9 @@ public class NopMetricBackend implements MetricBackend {
   public Timer getTimer(String key) {
     return NopTimer.INSTANCE;
   }
+
+  @Override
+  public void registerCheck(StatusCheck<?> check, String key) {
+    // do nothing
+  }
 }

@@ -55,6 +55,16 @@ public final class MetricFactory {
     return backend.getAccumulator(contextToName(null, context));
   }
 
+  public static void registerStatusCheck(final StatusCheck<?> check, final Class<?> anchor, final String ... context)
+  {
+    backend.registerCheck(check, contextToName(anchor.getName(), context));
+  }
+
+  public static void registerStatusCheck(final StatusCheck<?> check, final String ... context)
+  {
+    backend.registerCheck(check, contextToName(null, context));
+  }
+
   private static String contextToName(final String prefix, final String[] context) {
     final StringBuilder sb = new StringBuilder();
     if (prefix != null)
