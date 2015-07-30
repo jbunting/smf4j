@@ -1,3 +1,10 @@
+==NOTICE==
+
+I am still interested in this project, but for the time being in an effort to improve iteration time, I have moved my 
+efforts to an internal project that will provide these features. Eventually, I hope to resume this project using what 
+I've learned there.
+
+==smf4j==
 
 The idea is to write a metric collection facade that is as close to the slf4j API/framework as possible. 
 
