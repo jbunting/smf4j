@@ -1,6 +1,8 @@
 package io.synthesys.crux.metrics.dropwizard;
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.health.HealthCheck;
+import com.codahale.metrics.health.HealthCheckRegistry;
 import io.synthesys.crux.metrics.api.*;
 
 import java.net.URL;
@@ -23,6 +25,7 @@ import java.util.ServiceLoader;
  */
 public class DropwizardMetricBackend implements MetricBackend {
   private final MetricRegistry metricRegistry = new MetricRegistry();
+  private final HealthCheckRegistry healthCheckRegistry = new HealthCheckRegistry();
 
   @Override
   public Accumulator getAccumulator(String key) {
@@ -46,7 +49,7 @@ public class DropwizardMetricBackend implements MetricBackend {
 
   @Override
   public void registerCheck(StatusCheck<?> check, String key) {
-
+    healthCheckRegistry.register(key, new HealthCheckAdapter(statusCheck));
   }
 
   static MetricRegistry init() {
@@ -84,6 +87,28 @@ public class DropwizardMetricBackend implements MetricBackend {
     else
     {
       return allConfigurators.get(0);
+    }
+  }
+
+  private static class HealthCheckAdapter extends HealthCheck {
+    private final StatusCheck<?> statusCheck;
+
+    private HealthCheckAdapter(StatusCheck<?> statusCheck) {
+      this.statusCheck = statusCheck;
+    }
+
+    @Override
+    protected Result check() throws Exception {
+      final Enum status = statusCheck.check();
+      if (status == StatusCheck.UpDown.UP)
+      {
+        return Result.healthy();
+      }
+      else if (status == StatusCheck.UpDown.DOWN)
+      {
+        return Result.
+      }
+      throw new UnsupportedOperationException("ARGH");
     }
   }
 }
